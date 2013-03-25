@@ -2,22 +2,40 @@
 package com.example.gdg_opensource_codelab_sample_1;
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
 
-public class MainActivity extends Activity {
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuItem;
+
+import net.simonvt.menudrawer.MenuDrawer;
+
+public class MainActivity extends SherlockFragmentActivity {
+
+    private MenuDrawer mDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle(R.string.hello_opensoruce_code_lab);
+        
+        mDrawer = MenuDrawer.attach(this);
+        mDrawer.setContentView(R.layout.activity_main);
+        mDrawer.setMenuView(R.layout.activity_menu);        
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.abs__home:
+                //fall through
+            case android.R.id.home:
+                mDrawer.toggleMenu(true);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
-}
+}//end of class
