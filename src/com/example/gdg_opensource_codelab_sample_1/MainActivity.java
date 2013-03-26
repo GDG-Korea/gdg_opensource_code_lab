@@ -2,15 +2,27 @@
 package com.example.gdg_opensource_codelab_sample_1;
 
 import android.os.Bundle;
+import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 
 import net.simonvt.menudrawer.MenuDrawer;
 
+import java.util.ArrayList;
+
 public class MainActivity extends SherlockFragmentActivity {
 
     private MenuDrawer mDrawer;
+    
+    private ArrayList<JsonVideoResource> mVideoResoruces = new ArrayList<JsonVideoResource>();
+    {
+        mVideoResoruces.add(JsonVideoResource.generateMock());
+        mVideoResoruces.add(JsonVideoResource.generateMock());
+        mVideoResoruces.add(JsonVideoResource.generateMock());
+        mVideoResoruces.add(JsonVideoResource.generateMock());
+        mVideoResoruces.add(JsonVideoResource.generateMock());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +33,10 @@ public class MainActivity extends SherlockFragmentActivity {
         
         mDrawer = MenuDrawer.attach(this);
         mDrawer.setContentView(R.layout.activity_main);
-        mDrawer.setMenuView(R.layout.activity_menu);        
+        mDrawer.setMenuView(R.layout.activity_menu);
+        
+        ListView listView = (ListView) findViewById(android.R.id.list);
+        listView.setAdapter(new VideoResourceAdapter(this, mVideoResoruces));
     }
 
     @Override

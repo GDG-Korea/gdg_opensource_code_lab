@@ -1,0 +1,41 @@
+{
+  "id": string,
+  "kind": "youtube#channel",
+  "etag": etag,
+  "snippet": {
+    "title": string,
+    "description": string,
+    "publishedAt": datetime,
+    "thumbnails": {
+      (key): {
+        "url": string,
+        "width": unsigned integer,
+        "height": unsigned integer
+      }
+    }
+  },
+  "contentDetails": {
+    "relatedPlaylists": {
+      "likes": string,
+      "favorites": string,
+      "uploads": string,
+      "watchHistory": string,
+      "watchLater": string
+    },
+    "googlePlusUserId": string
+  },
+  "statistics": {
+    "viewCount": unsigned long,
+    "commentCount": unsigned long,
+    "subscriberCount": unsigned long,
+    "videoCount": unsigned long
+  },
+  "topicDetails": {
+    "topicIds": [
+      string
+    ]
+  },
+  "status": {
+    "privacyStatus": string
+  }
+}
