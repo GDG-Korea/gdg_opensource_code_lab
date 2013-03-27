@@ -11,8 +11,12 @@ import net.simonvt.menudrawer.MenuDrawer;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends SherlockFragmentActivity
@@ -23,6 +27,8 @@ public class MainActivity extends SherlockFragmentActivity
     private MenuDrawer mDrawer;
     private YouTubeChannelClient mYouTubeClient;
     private ListView mListView;
+    private ListView mListMenu;
+    private ChannelListAdapter mChannelListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +46,39 @@ public class MainActivity extends SherlockFragmentActivity
 
         mListView = (ListView) findViewById(android.R.id.list);
 
+        mChannelListAdapter = new ChannelListAdapter(this, new ArrayList<Playlist>());
+
+        mListMenu = (ListView) findViewById(R.id.list_menu);
+
+        mListMenu.setAdapter(mChannelListAdapter);
+        mListMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Playlist item = mChannelListAdapter.getItem(position);
+                mYouTubeClient.getPlaylistItem(item.getId());
+                mDrawer.closeMenu();
+            }
+        });
+
         mYouTubeClient.getPlayList();
     }
 
     @Override
     public void onLoadPlaylist(List<Playlist> playlist) {
-        for (Playlist item : playlist) {
-            Log.d(TAG, "channedId = " + item.getId());
+
+        mChannelListAdapter.clear();
+        for(Playlist item : playlist) {
+            mChannelListAdapter.add(item);
         }
+        mChannelListAdapter.notifyDataSetChanged();
 
         if (playlist.size() > 0) {
-            mYouTubeClient.getPlaylistItem(playlist.get(playlist.size() - 1).getId());
+            mYouTubeClient.getPlaylistItem(playlist.get(0).getId());
         }
     }
 
     @Override
     public void onLoadPlaylistItem(List<PlaylistItem> playlistItem) {
-        for (PlaylistItem item : playlistItem) {
-            Log.d(TAG, "title = " + item.getSnippet().getTitle());
-            Log.d(TAG, "desc = " + item.getSnippet().getDescription());
-            Log.d(TAG, "thumbnails = " + item.getSnippet().getThumbnails().getDefault().getUrl());
-
-            Log.d(TAG, "videoId = " + item.getContentDetails().getVideoId());
-        }
-
         mListView.setAdapter(new VideoResourceAdapter(this, playlistItem));
     }
 
