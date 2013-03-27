@@ -11,3 +11,5 @@ bin/*
 .idea
 .jhw-cache
 hardcopy.*
+gen-external-apklibs/
+out/
