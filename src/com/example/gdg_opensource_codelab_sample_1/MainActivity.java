@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends SherlockFragmentActivity
-implements YouTubeChannelClient.Callbacks {
+        implements YouTubeChannelClient.Callbacks {
 
     @SuppressWarnings("unused")
     private static final String TAG = "MainActivity";
@@ -32,9 +32,9 @@ implements YouTubeChannelClient.Callbacks {
     private ListView mListView;
     private ListView mListMenu;
     private ChannelListAdapter mChannelListAdapter;
-	private VideoResourceAdapter mPlayListAdapter;
+    private VideoResourceAdapter mPlayListAdapter;
 
-	@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -50,15 +50,15 @@ implements YouTubeChannelClient.Callbacks {
                 .newYouTubeChannelClient(YOUTUBE_API_KEY, ANDROID_DEVELOPER_CHANNEL_ID);
 
         mListView = (ListView) findViewById(android.R.id.list);
-		mPlayListAdapter = new VideoResourceAdapter(this,
-				new ArrayList<PlaylistItem>());
+        mPlayListAdapter = new VideoResourceAdapter(this,
+                new ArrayList<PlaylistItem>());
 
-		mListView.setAdapter(mPlayListAdapter);
+        mListView.setAdapter(mPlayListAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                
+
                 PlaylistItem item = (PlaylistItem) mListView.getItemAtPosition(position);
                 String videoId = item.getSnippet().getResourceId().getVideoId();
 
@@ -88,8 +88,8 @@ implements YouTubeChannelClient.Callbacks {
 
     @Override
     public void onLoadPlaylist(List<Playlist> playlist) {
-		mChannelListAdapter.clear();
-        for(Playlist item : playlist) {
+        mChannelListAdapter.clear();
+        for (Playlist item : playlist) {
             mChannelListAdapter.add(item);
         }
         mChannelListAdapter.notifyDataSetChanged();
@@ -101,11 +101,11 @@ implements YouTubeChannelClient.Callbacks {
 
     @Override
     public void onLoadPlaylistItem(String playlistId, List<PlaylistItem> playlistItems) {
-		mPlayListAdapter.clear();
-		for(PlaylistItem item : playlistItems) {
-			mPlayListAdapter.add(item);
-		}
-		mPlayListAdapter.notifyDataSetChanged();
+        mPlayListAdapter.clear();
+        for (PlaylistItem item : playlistItems) {
+            mPlayListAdapter.add(item);
+        }
+        mPlayListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -113,7 +113,7 @@ implements YouTubeChannelClient.Callbacks {
 
         switch (item.getItemId()) {
             case R.id.abs__home:
-                //fall through
+                // fall through
             case android.R.id.home:
                 mDrawer.toggleMenu(true);
                 return true;
@@ -128,4 +128,4 @@ implements YouTubeChannelClient.Callbacks {
         return super.onCreateOptionsMenu(menu);
     }
 
-}//end of class
+}// end of class

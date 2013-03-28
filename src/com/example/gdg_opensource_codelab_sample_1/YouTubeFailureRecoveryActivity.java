@@ -18,9 +18,10 @@ public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity
         if (errorReason.isUserRecoverableError()) {
             errorReason.getErrorDialog(this, RECOVERY_DIALOG_REQUEST).show();
         } else {
-//            String errorMessage = String.format(getString(R.string.error_player),
-//                    errorReason.toString());
-//            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+            // String errorMessage =
+            // String.format(getString(R.string.error_player),
+            // errorReason.toString());
+            // Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
         }
     }
 

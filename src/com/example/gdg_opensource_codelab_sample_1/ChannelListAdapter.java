@@ -1,3 +1,4 @@
+
 package com.example.gdg_opensource_codelab_sample_1;
 
 import android.content.Context;
@@ -26,10 +27,9 @@ public class ChannelListAdapter extends ArrayAdapter<Playlist> {
         }
 
         Playlist res = getItem(position);
-        ((TextView)convertView).setText(res.getSnippet().getTitle());
+        ((TextView) convertView).setText(res.getSnippet().getTitle());
 
         return convertView;
     }
 
-
-}//end of class
+}// end of class

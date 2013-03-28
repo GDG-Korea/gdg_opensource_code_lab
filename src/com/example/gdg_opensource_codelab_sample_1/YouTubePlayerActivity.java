@@ -19,11 +19,12 @@ import com.google.android.youtube.player.YouTubePlayerView;
 public class YouTubePlayerActivity extends YouTubeFailureRecoveryActivity implements
         OnFullscreenListener {
 
-/**
- * You can use it as you want~
- * @author The Finest Artist
- */
-    
+    /**
+     * You can use it as you want~
+     * 
+     * @author The Finest Artist
+     */
+
     public static final String EXTRA_VIDEO_ID = "video_id";
     private static final boolean TOAST = false;
 

@@ -1,3 +1,4 @@
+
 package com.example.gdg_opensource_codelab_sample_1;
 
 import android.content.Context;
@@ -17,8 +18,8 @@ import com.novoda.imageloader.core.model.ImageTagFactory;
 
 import java.util.List;
 
-public class VideoResourceAdapter extends ArrayAdapter<PlaylistItem>{
-    
+public class VideoResourceAdapter extends ArrayAdapter<PlaylistItem> {
+
     private ImageTagFactory mTagFactory = ImageTagFactory.newInstance();
 
     public VideoResourceAdapter(Context context, List<PlaylistItem> objects) {
@@ -31,8 +32,9 @@ public class VideoResourceAdapter extends ArrayAdapter<PlaylistItem>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.video_resource_item, null);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.video_resource_item,
+                    null);
         }
 
         PlaylistItem res = getItem(position);
@@ -41,7 +43,7 @@ public class VideoResourceAdapter extends ArrayAdapter<PlaylistItem>{
         TextView tv1 = (TextView) convertView.findViewById(R.id.video_title);
 
         tv1.setText(res.getSnippet().getTitle());
-        
+
         String url = getThumbnailUrl(res.getSnippet());
         ImageTag tag = mTagFactory.build(url, getContext());
         iv.setTag(tag);
@@ -52,10 +54,10 @@ public class VideoResourceAdapter extends ArrayAdapter<PlaylistItem>{
     private String getThumbnailUrl(PlaylistItemSnippet snippet) {
         ThumbnailDetails thumbs = snippet.getThumbnails();
         Thumbnail thumb = thumbs.getDefault();
-        if( thumb == null )
+        if (thumb == null)
             return null;
-        
+
         return thumb.getUrl();
     }
 
-}//end of class
+}// end of class

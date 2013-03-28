@@ -1,3 +1,4 @@
+
 package com.example.gdg_opensource_codelab_sample_1;
 
 import android.app.Application;
@@ -12,12 +13,13 @@ public class SampleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LoaderSettings settings = new LoaderSettings.SettingsBuilder().withDisconnectOnEveryCall(true).build(this);
-        sImageManager = new ImageManager(this, settings);        
+        LoaderSettings settings = new LoaderSettings.SettingsBuilder().withDisconnectOnEveryCall(
+                true).build(this);
+        sImageManager = new ImageManager(this, settings);
     }
 
     public static final ImageManager getImageManager() {
         return sImageManager;
-    }    
+    }
 
-}//end of class
+}// end of class
