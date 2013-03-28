@@ -47,7 +47,7 @@ implements YouTubeChannelClient.Callbacks {
         mDrawer.setMenuView(R.layout.activity_menu);
 
         mYouTubeClient = YouTubeChannelClient
-                .getYouTubeChannelClient(YOUTUBE_API_KEY, ANDROID_DEVELOPER_CHANNEL_ID, this);
+                .newYouTubeChannelClient(YOUTUBE_API_KEY, ANDROID_DEVELOPER_CHANNEL_ID);
 
         mListView = (ListView) findViewById(android.R.id.list);
 		mPlayListAdapter = new VideoResourceAdapter(this,
@@ -78,12 +78,12 @@ implements YouTubeChannelClient.Callbacks {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Playlist item = mChannelListAdapter.getItem(position);
-                mYouTubeClient.getPlaylistItem(item.getId());
+                mYouTubeClient.getPlaylistItem(item.getId(), MainActivity.this);
                 mDrawer.closeMenu();
             }
         });
 
-        mYouTubeClient.getPlayList();
+        mYouTubeClient.getPlayList(this);
     }
 
     @Override
@@ -95,12 +95,12 @@ implements YouTubeChannelClient.Callbacks {
         mChannelListAdapter.notifyDataSetChanged();
 
         if (playlist.size() > 0) {
-            mYouTubeClient.getPlaylistItem(playlist.get(0).getId());
+            mYouTubeClient.getPlaylistItem(playlist.get(0).getId(), this);
         }
     }
 
     @Override
-    public void onLoadPlaylistItem(List<PlaylistItem> playlistItems) {
+    public void onLoadPlaylistItem(String playlistId, List<PlaylistItem> playlistItems) {
 		mPlayListAdapter.clear();
 		for(PlaylistItem item : playlistItems) {
 			mPlayListAdapter.add(item);
