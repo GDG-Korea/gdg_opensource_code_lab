@@ -1,5 +1,7 @@
 package com.example.gdg_opensource_codelab_sample_1;
 
+import android.os.AsyncTask;
+
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -11,8 +13,6 @@ import com.google.api.services.youtube.model.Playlist;
 import com.google.api.services.youtube.model.PlaylistItem;
 import com.google.api.services.youtube.model.PlaylistItemListResponse;
 import com.google.api.services.youtube.model.PlaylistListResponse;
-
-import android.os.AsyncTask;
 
 import java.io.IOException;
 import java.util.List;

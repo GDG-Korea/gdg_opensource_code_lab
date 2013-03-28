@@ -1,29 +1,32 @@
 
 package com.example.gdg_opensource_codelab_sample_1;
 
-import com.google.api.services.youtube.model.Playlist;
-import com.google.api.services.youtube.model.PlaylistItem;
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.MenuItem;
-
-import net.simonvt.menudrawer.MenuDrawer;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.google.api.services.youtube.model.Playlist;
+import com.google.api.services.youtube.model.PlaylistItem;
+
+import net.simonvt.menudrawer.MenuDrawer;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends SherlockFragmentActivity
-        implements YouTubeChannelClient.Callbacks {
+implements YouTubeChannelClient.Callbacks {
+
+    @SuppressWarnings("unused")
+    private static final String TAG = "MainActivity";
+
     public static final String YOUTUBE_API_KEY = "AIzaSyCwvRaeu1TqEG0ONmCcssVNeSTeHJx-eqY";
     public static final String ANDROID_DEVELOPER_CHANNEL_ID = "UCVHFbqXqoYvEWM1Ddxl0QDg";
-    private static final String TAG = "MainActivity";
+
     private MenuDrawer mDrawer;
     private YouTubeChannelClient mYouTubeClient;
     private ListView mListView;
@@ -35,6 +38,7 @@ public class MainActivity extends SherlockFragmentActivity
         super.onCreate(savedInstanceState);
 
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle(R.string.hello_opensoruce_code_lab);
 
         mDrawer = MenuDrawer.attach(this);
@@ -45,6 +49,20 @@ public class MainActivity extends SherlockFragmentActivity
                 .getYouTubeChannelClient(YOUTUBE_API_KEY, ANDROID_DEVELOPER_CHANNEL_ID, this);
 
         mListView = (ListView) findViewById(android.R.id.list);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                
+                PlaylistItem item = (PlaylistItem) mListView.getItemAtPosition(position);
+                String videoId = item.getSnippet().getResourceId().getVideoId();
+
+                Intent intent = new Intent(MainActivity.this, YouTubePlayerActivity.class);
+                intent.putExtra(YouTubePlayerActivity.EXTRA_VIDEO_ID, videoId);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+            }
+        });
 
         mChannelListAdapter = new ChannelListAdapter(this, new ArrayList<Playlist>());
 
@@ -96,5 +114,10 @@ public class MainActivity extends SherlockFragmentActivity
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
 }//end of class

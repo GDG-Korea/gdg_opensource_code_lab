@@ -1,28 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/video_item_padding"
+    >
     
     <ImageView 
         android:id="@+id/video_thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/video_item_padding"
+        android:layout_width="@dimen/video_thumb_width"
+        android:layout_height="@dimen/video_thumb_height"
         />
 
     <TextView
         android:id="@+id/video_title"
+        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/video_thumbnail"
-        android:text="@string/hello_world" />
-    
-    <TextView
-        android:id="@+id/video_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/video_thumbnail"
-        android:layout_below="@id/video_title"
-        android:text="@string/hello_world" />
-    
+        android:layout_toRightOf="@id/video_thumbnail"/>
 
 </RelativeLayout>
