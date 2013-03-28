@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -16,9 +15,6 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.OnFullscreenListener;
 import com.google.android.youtube.player.YouTubePlayerView;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class YouTubePlayerActivity extends YouTubeFailureRecoveryActivity implements
         OnFullscreenListener {
@@ -136,47 +132,6 @@ public class YouTubePlayerActivity extends YouTubeFailureRecoveryActivity implem
         }
 
         return super.onKeyDown(keyCode, event);
-    }
-
-    public static String getYouTubeVideoId(String video_url) {
-
-        if (video_url != null && video_url.length() > 0) {
-
-            Uri video_uri = Uri.parse(video_url);
-            String video_id = video_uri.getQueryParameter("v");
-
-            if (video_id == null)
-                video_id = parseYoutubeVideoId(video_url);
-
-            return video_id;
-        }
-        return null;
-    }
-
-    public static String parseYoutubeVideoId(String youtubeUrl)
-    {
-        String video_id = null;
-        if (youtubeUrl != null && youtubeUrl.trim().length() > 0 &&
-                youtubeUrl.startsWith("http"))
-        {
-            // ^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
-            String expression = "^.*((youtu.be" + "\\/)"
-                    + "|(v\\/)|(\\/u\\/w\\/)|(embed\\/)|(watch\\?))\\??v?=?([^#\\&\\?]*).*";
-            CharSequence input = youtubeUrl;
-            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-            Matcher matcher = pattern.matcher(input);
-            if (matcher.matches())
-            {
-                // Regular expression some how doesn't work with id with "v" at
-                // prefix
-                String groupIndex1 = matcher.group(7);
-                if (groupIndex1 != null && groupIndex1.length() == 11)
-                    video_id = groupIndex1;
-                else if (groupIndex1 != null && groupIndex1.length() == 10)
-                    video_id = "v" + groupIndex1;
-            }
-        }
-        return video_id;
     }
 
 }
