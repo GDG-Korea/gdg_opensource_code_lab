@@ -45,6 +45,7 @@ public class MainActivity extends SherlockFragmentActivity
         mDrawer = MenuDrawer.attach(this);
         mDrawer.setContentView(R.layout.activity_main);
         mDrawer.setMenuView(R.layout.activity_menu);
+        mDrawer.setMenuSize(getResources().getDimensionPixelSize(R.dimen.menu_width));
 
         mYouTubeClient = YouTubeChannelClient
                 .newYouTubeChannelClient(YOUTUBE_API_KEY, ANDROID_DEVELOPER_CHANNEL_ID);
