@@ -1,11 +1,15 @@
 
 package com.example.gdg_opensource_codelab_sample_1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
@@ -83,8 +87,14 @@ public class MainActivity extends SherlockFragmentActivity
                 mDrawer.closeMenu();
             }
         });
-
-        mYouTubeClient.getPlayList(this);
+        
+        
+        if (isNetworkAvailable()) {
+        	mYouTubeClient.getPlayList(this);
+        } else {
+        	Toast.makeText(MainActivity.this, "네트웍상태 확인해주세요.", Toast.LENGTH_SHORT).show();
+        }
+        
     }
 
     @Override
@@ -127,6 +137,17 @@ public class MainActivity extends SherlockFragmentActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+    
+    /**
+     * 네트웍 상태 체크
+     * @return
+     */
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager 
+              = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }// end of class
