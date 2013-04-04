@@ -1,11 +1,11 @@
 gdg_opensource_code_lab
 ==================================
 
-Sample project used in GDG Korea Android #1 Open Source Code Lab Project
+Sample project used in 'Open Source Code Lab'
 
 event page url: https://plus.google.com/u/0/events/c6imk6fm9gh5toeia2lgvrq3ogg
 
-This event was helded in Seoul, Korea. And, about 40 passionated participants had a chance to make a simple YouTube play application, Using famous & usefull android open source libraries,
+This event was helded in Seoul, Korea, hosted by GDG Korea Androd, and about 40 passionated participants had a chance to make a simple YouTube play application, Using famous & usefull android open source libraries,
 
 Build Dependency
 ---------------------------------------------
