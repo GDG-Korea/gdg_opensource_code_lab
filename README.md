@@ -17,7 +17,7 @@ Used Libraries
  * ActionBarSherlock - https://github.com/JakeWharton/ActionBarSherlock
  * Android Menu Drawer - https://github.com/SimonVT/android-menudrawer
  * YouTube Data & Player API - https://developers.google.com/youtube/android/player/
- * AndroidImageLoader - https://github.com/wuman/AndroidImageLoader
+ * ImageLoader - https://github.com/novoda/ImageLoader
  * HttpResponseCache - https://github.com/candrews/HttpResponseCache
 
 
